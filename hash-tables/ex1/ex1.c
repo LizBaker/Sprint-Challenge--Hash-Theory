@@ -5,9 +5,25 @@
 
 Answer *get_indices_of_item_weights(int *weights, int length, int limit)
 {
+  Answer *answer = NULL;
   HashTable *ht = create_hash_table(16);
-
-  // YOUR CODE HERE
+  for (int i=0; i<length; i++){
+  hash_table_insert(ht, weights[i], i);
+  }
+  for (int i=0; i<length; i++){
+    int ind = hash_table_retrieve(ht, (limit - weights[i]));
+    if (ind != -1){
+      if (i > ind){
+        answer->index_1 = i;
+        answer->index_2 = ind;
+      } else {
+        answer->index_1 = ind;
+        answer->index_2 = i;
+      }
+    }
+    return answer;
+  }
+  
 
   return NULL;
 }
